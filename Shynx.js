@@ -26,6 +26,13 @@ if (Meteor.isClient) {
     }
   });
 
+  Accounts.ui.config({
+    passwordSignupFields: "USERNAME_ONLY"
+  });
+
+  Template.registerHelper('formatDate', function(date) {
+    return moment(date).format('DD/MM/YYYY');
+  });
 }
 
 if (Meteor.isServer) {
@@ -38,7 +45,10 @@ Meteor.methods({
   addLink: function(title, href) {
     Links.insert({
       title: title,
-      href: href
+      href: href,
+      createdAt: new Date(),
+      owner: Meteor.userId(),
+      username: Meteor.user().username
     });
   }
 });
