@@ -23,6 +23,9 @@ if (Meteor.isClient) {
 
       // Prevent default form submit
       return false;
+    },
+    "click .like": function() {
+      Meteor.call("like",this._id)
     }
   });
 
@@ -48,7 +51,22 @@ Meteor.methods({
       href: href,
       createdAt: new Date(),
       owner: Meteor.userId(),
-      username: Meteor.user().username
+      username: Meteor.user().username,
+      likes: []
     });
+  },
+  like: function(linkId) {
+    // Tasks.update(taskId, { $set: { checked: setChecked} });
+    var likesByUser = Links.find({
+      _id: linkId,
+      likes: { $elemMatch: {owner: Meteor.userId()} }
+    }).count();
+
+    if( likesByUser == 0) {
+      Links.update(
+        linkId,
+        { $push: { likes: {owner: Meteor.userId(), username: Meteor.user().username } } }
+      )
+    }
   }
 });

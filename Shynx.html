@@ -20,6 +20,11 @@
       <li>
         <a href="{{href}}" target="_blank">{{title}}</a><br/>
         Added by {{username}} on {{formatDate createdAt}}.
+        <a href="#" class="like">LIKE!</a><br/>
+        Liked by:
+        {{#each likes}}
+          {{username}}, 
+        {{/each}}
       </li>
     {{/each}}
     </ul>
