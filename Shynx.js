@@ -6,7 +6,7 @@ if (Meteor.isClient) {
 
   Template.body.helpers({
     links: function () {
-      return Links.find({});
+      return Links.find({}, {sort: {createdAt: -1}});
     }
   });
 
@@ -34,7 +34,7 @@ if (Meteor.isClient) {
   });
 
   Template.registerHelper('formatDate', function(date) {
-    return moment(date).format('DD/MM/YYYY');
+    return moment(date).format('HH:mm DD/MM/YYYY');
   });
 }
 
