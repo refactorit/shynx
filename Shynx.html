@@ -1,0 +1,21 @@
+<head>
+  <title>Shynx</title>
+</head>
+
+<body>
+  <h1>Welcome to Shynx!</h1>
+
+  <form class="new-link">
+    <label name="title">Title:</label>
+    <input type="text" name="title"/><br/>
+    <label name="href">Href:</label>
+    <input type="text" name="href"/>
+    <input type="submit">
+  </form>
+
+  <ul>
+  {{#each links}}
+    <li><a href="{{href}}" target="_blank">{{title}}</a></li>
+  {{/each}}
+  </ul>
+</body>
