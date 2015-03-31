@@ -1,0 +1,13 @@
+<template name="link">
+  <li class="list-group-item">
+    <a href="{{href}}" target="_blank">{{title}}</a> - {{href}} <br/>
+    <p>
+      Added by {{username}} on {{formatDate createdAt}}. <br/>
+      <a href="#" class="like btn btn-default btn-xs"><i class="glyphicon glyphicon-star"></i>&nbsp;LIKE!</a><br/>
+      {{#if likes.length}}
+        Liked by:
+        {{#each likes}}{{username}},{{/each}}
+      {{/if}}
+    </p>
+  </li>
+</template>
