@@ -21,17 +21,9 @@ if (Meteor.isClient) {
 
   Template.body.events({
     "submit .new-link": function (event) {
-      var title = event.target.title.value;
       var href = event.target.href.value;
-
-      // Meteor.call("fetchLinkData", href);
       Meteor.call("addLink", href);
-
-      // Clear form
-      // event.target.title.value = "";
-      // event.target.href.value = "";
-
-      // Prevent default form submit
+      event.target.href.value = "";
       return false;
     },
     "click .like": function() {
