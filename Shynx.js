@@ -63,36 +63,19 @@ Meteor.methods({
       href: href,
       createdAt: new Date(),
       owner: Meteor.userId(),
-      username: Meteor.user().username,
-      likes: []
+      username: Meteor.user().username
     });
   },
   like: function(linkId) {
-    // Tasks.update(taskId, { $set: { checked: setChecked} });
-    var likesByUser = Links.find({
-      _id: linkId,
-      likes: { $elemMatch: {owner: Meteor.userId()} }
-    }).count();
-
-    if( likesByUser == 0) {
-      Links.update(
-        linkId,
-        { $push: { likes: {owner: Meteor.userId(), username: Meteor.user().username } } }
-      )
-    }
+    Links.update(
+      linkId,
+      { $addToSet: { likes: {owner: Meteor.userId(), username: Meteor.user().username } } }
+    )
   },
   unlike: function(linkId) {
-    // Tasks.update(taskId, { $set: { checked: setChecked} });
-    var likesByUser = Links.find({
-      _id: linkId,
-      likes: { $elemMatch: {owner: Meteor.userId()} }
-    }).count();
-
-    if( likesByUser > 0) {
-      Links.update(
-        linkId,
-        { $pop: { likes: {owner: Meteor.userId(), username: Meteor.user().username } } }
-      )
-    }
+    Links.update(
+      linkId,
+      { $pop: { likes: {owner: Meteor.userId()} } }
+    )
   },
 });
