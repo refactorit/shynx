@@ -24,11 +24,12 @@ if (Meteor.isClient) {
       var title = event.target.title.value;
       var href = event.target.href.value;
 
-      Meteor.call("addLink", title, href);
+      Meteor.call("fetchLinkData", href);
+      // Meteor.call("addLink", title, href);
 
       // Clear form
-      event.target.title.value = "";
-      event.target.href.value = "";
+      // event.target.title.value = "";
+      // event.target.href.value = "";
 
       // Prevent default form submit
       return false;
@@ -90,7 +91,19 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
   Meteor.startup(function () {
-    // code to run on server at startup
+    Meteor.methods({
+      fetchLinkData: function(href) {
+        console.log("Fetching; " + href);
+        Meteor.http.get(href, function(error, data) {
+          var titleMatch = data.content.match(/<title>(.+)<\/title>/i);
+          var title = href;
+          if( titleMatch ) {
+            title = titleMatch[1]
+          }
+          console.log(title);
+        });
+      }
+    });
   });
 }
 
