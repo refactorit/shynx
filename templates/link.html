@@ -3,10 +3,18 @@
     <a href="{{href}}" target="_blank">{{title}}</a> - {{href}} <br/>
     <p>
       Added by {{username}} on {{formatDate createdAt}}. <br/>
-      <a href="#" class="like btn btn-default btn-xs"><i class="glyphicon glyphicon-star"></i>&nbsp;LIKE!</a><br/>
+      
       {{#if likes.length}}
-        Liked by:
-        {{#each likes}}{{username}},{{/each}}
+        <p>
+          Liked by:
+          {{#each likes}}{{username}},{{/each}}
+        </p>
+      {{/if}}
+
+      {{#if didLike _id }}
+        <a href="#" class="unlike btn btn-default btn-xs">Unlike</a>
+      {{else}}
+        <a href="#" class="like btn btn-default btn-xs"><i class="glyphicon glyphicon-star"></i>&nbsp;LIKE!</a>
       {{/if}}
     </p>
   </li>

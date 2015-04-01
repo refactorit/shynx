@@ -1,4 +1,5 @@
 Links = new Mongo.Collection("links");
+Likes = new Mongo.Collection("likes");
 
 if (Meteor.isClient) {
   // counter starts at 0
@@ -26,6 +27,9 @@ if (Meteor.isClient) {
     },
     "click .like": function() {
       Meteor.call("like",this._id)
+    },
+    "click .unlike": function() {
+      Meteor.call("unlike",this._id)
     }
   });
 
@@ -35,6 +39,14 @@ if (Meteor.isClient) {
 
   Template.registerHelper('formatDate', function(date) {
     return moment(date).format('HH:mm DD/MM/YYYY');
+  });
+
+  Template.registerHelper('didLike', function(linkId) {
+    var likesByUser = Links.find({
+      _id: linkId,
+      likes: { $elemMatch: {owner: Meteor.userId()} }
+    }).count();
+    return (likesByUser > 0);
   });
 }
 
@@ -68,5 +80,19 @@ Meteor.methods({
         { $push: { likes: {owner: Meteor.userId(), username: Meteor.user().username } } }
       )
     }
-  }
+  },
+  unlike: function(linkId) {
+    // Tasks.update(taskId, { $set: { checked: setChecked} });
+    var likesByUser = Links.find({
+      _id: linkId,
+      likes: { $elemMatch: {owner: Meteor.userId()} }
+    }).count();
+
+    if( likesByUser > 0) {
+      Links.update(
+        linkId,
+        { $pop: { likes: {owner: Meteor.userId(), username: Meteor.user().username } } }
+      )
+    }
+  },
 });
