@@ -24,8 +24,8 @@ if (Meteor.isClient) {
       var title = event.target.title.value;
       var href = event.target.href.value;
 
-      Meteor.call("fetchLinkData", href);
-      // Meteor.call("addLink", title, href);
+      // Meteor.call("fetchLinkData", href);
+      Meteor.call("addLink", href);
 
       // Clear form
       // event.target.title.value = "";
@@ -92,8 +92,7 @@ if (Meteor.isClient) {
 if (Meteor.isServer) {
   Meteor.startup(function () {
     Meteor.methods({
-      fetchLinkData: function(href) {
-        console.log("Fetching; " + href);
+      addLink: function(href) {
         Meteor.http.get(href, function(error, data) {
           var titleMatch = data.content.match(/<title>(.+)<\/title>/i);
           var title = href;
@@ -101,6 +100,13 @@ if (Meteor.isServer) {
             title = titleMatch[1]
           }
           console.log(title);
+          Links.insert({
+            title: title,
+            href: href,
+            createdAt: new Date(),
+            owner: Meteor.userId(),
+            username: Meteor.user().username
+          });
         });
       }
     });
@@ -108,15 +114,6 @@ if (Meteor.isServer) {
 }
 
 Meteor.methods({
-  addLink: function(title, href) {
-    Links.insert({
-      title: title,
-      href: href,
-      createdAt: new Date(),
-      owner: Meteor.userId(),
-      username: Meteor.user().username
-    });
-  },
   like: function(linkId) {
     Links.update(
       linkId,
