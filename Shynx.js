@@ -45,6 +45,10 @@ if (Meteor.isClient) {
     "click .unfavorite": function() {
       Meteor.call('unmarkAsFavorite', this._id)
       return false;
+    },
+    "click .tab-select": function(event) {
+      Session.set("activeTab", $(event.target).attr('href'));
+      return false;
     }
   });
 
@@ -54,6 +58,14 @@ if (Meteor.isClient) {
 
   Template.registerHelper('formatDate', function(date) {
     return moment(date).format('HH:mm DD/MM/YYYY');
+  });
+
+  Template.registerHelper('currentTab', function(name) {
+    var activeTab = Session.get("activeTab");
+    if(!activeTab) {
+      activeTab = "feed"
+    }
+    return (name ==  activeTab);
   });
 
   Template.registerHelper('didLike', function(linkId) {

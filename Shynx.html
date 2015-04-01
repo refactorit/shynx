@@ -22,22 +22,38 @@
       </form>
     </div>
 
-    <h3>My favorites</h3>
+    <ul class="nav nav-pills">
+      <li role="presentation" class="{{#if currentTab "feed"}}active{{/if}}">
+        <a href="feed" class="tab-select">Feed</a>
+      </li>
 
-    <ul class="list-group">
-      {{#each myFavorites}}
-        <li class="list-group-item">
-          <a href="#" class="unfavorite"><i class="glyphicon glyphicon-remove"></i></a>
-          <a href="{{href}}" target="_blank">{{title}}</a> - {{ href }}
-        </li>
-      {{/each}}
+      <li role="presentation" class="{{#if currentTab "favorites"}}active{{/if}}">
+        <a href="favorites" class="tab-select">Favorites</a>
+      </li>
     </ul>
 
-    <ul class="list-group">
-    {{#each links}}
-      {{> link}}
-    {{/each}}
-    </ul>
+    {{#if currentTab "feed"}}
+      <h3>Feed</h3>
+      <ul class="list-group">
+        {{#each links}}
+          {{> link}}
+        {{/each}}
+      </ul>
+    {{/if}}
+
+    {{#if currentTab "favorites"}}
+      <h3>Favorites</h3>
+      <ul class="list-group">
+        {{#each myFavorites}}
+          <li class="list-group-item">
+            <a href="#" class="unfavorite"><i class="glyphicon glyphicon-remove"></i></a>
+            <a href="{{href}}" target="_blank">{{title}}</a> - {{ href }}
+          </li>
+        {{/each}}
+      </ul>
+    {{/if}}
+
+    
   {{else}}
     <div class="jumbotron">
       <h1>Share your links!</h1>
