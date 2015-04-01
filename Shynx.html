@@ -23,10 +23,15 @@
     </div>
 
     <h3>My favorites</h3>
-    {{#each myFavorites}}
-      <a href="{{href}}" target="_blank">{{title}}</a> 
-      (<a href="#" class="unfavorite">remove</a>),
-    {{/each}}
+
+    <ul class="list-group">
+      {{#each myFavorites}}
+        <li class="list-group-item">
+          <a href="{{href}}" target="_blank">{{title}}</a> - {{ href }}
+          (<a href="#" class="unfavorite">remove</a>),
+        </li>
+      {{/each}}
+    </ul>
 
     <ul class="list-group">
     {{#each links}}

@@ -10,7 +10,8 @@ if (Meteor.isClient) {
     },
     myFavorites: function() {
       return Links.find(
-        {favoritedBy: { $elemMatch: {owner: Meteor.userId()} }}
+        {favoritedBy: { $elemMatch: {owner: Meteor.userId()} }},
+        {sort: {createdAt: -1}}
       );
     }
   });
