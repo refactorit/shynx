@@ -12,16 +12,16 @@
       {{/if}}
 
       {{#if didLike _id }}
-        <a href="#" class="unlike btn btn-default btn-xs">Unlike</a>
+        <a href="#" class="unlike btn btn-default btn-sm">Unlike</a>
       {{else}}
-        <a href="#" class="like btn btn-default btn-xs"><i class="glyphicon glyphicon-star"></i>&nbsp;LIKE!</a>
+        <a href="#" class="like btn btn-default btn-sm"><i class="glyphicon glyphicon-thumbs-up"></i>&nbsp;Like</a>
       {{/if}}
 
-      {{#unless isFavorite _id }}
-        <a href="#" class="favorite btn btn-default btn-xs">FAV!</a>
-      {{/unless}}
-
-      {{#each favoritedBy}}{{username}},{{/each}}
+      {{#if isFavorite _id }}
+        <a href="#" class="unfavorite btn btn-default btn-sm"><i class="glyphicon glyphicon-star"></i></a>
+      {{else}}
+        <a href="#" class="favorite btn btn-default btn-sm"><i class="glyphicon glyphicon-star-empty"></i></a>
+      {{/if}}
     </p>
   </li>
 </template>
