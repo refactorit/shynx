@@ -1,5 +1,4 @@
 Links = new Mongo.Collection("links");
-Likes = new Mongo.Collection("likes");
 
 if (Meteor.isClient) {
   // counter starts at 0
@@ -30,6 +29,9 @@ if (Meteor.isClient) {
     },
     "click .unlike": function() {
       Meteor.call("unlike",this._id)
+    },
+    "click .favorite": function() {
+      Meteor.call('markAsFavorite', this._id)
     }
   });
 
@@ -78,4 +80,10 @@ Meteor.methods({
       { $pop: { likes: {owner: Meteor.userId()} } }
     )
   },
+  markAsFavorite: function(linkId) {
+    Links.update(
+      linkId,
+      { $addToSet: { favoritedBy: {owner: Meteor.userId(), username: Meteor.user().username } } }
+    )
+  }
 });

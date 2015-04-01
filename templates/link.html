@@ -16,6 +16,9 @@
       {{else}}
         <a href="#" class="like btn btn-default btn-xs"><i class="glyphicon glyphicon-star"></i>&nbsp;LIKE!</a>
       {{/if}}
+
+      <a href="#" class="favorite btn btn-default btn-xs">FAV!</a>
+      {{#each favoritedBy}}{{username}},{{/each}}
     </p>
   </li>
 </template>
