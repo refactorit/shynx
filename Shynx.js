@@ -13,6 +13,9 @@ if (Meteor.isClient) {
         {favoritedBy: { $elemMatch: {owner: Meteor.userId()} }},
         {sort: {createdAt: -1}}
       );
+    },
+    myFavoritesCount: function() {
+      return Links.find({favoritedBy: { $elemMatch: {owner: Meteor.userId()} }}).count();
     }
   });
 
