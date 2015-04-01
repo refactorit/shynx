@@ -7,6 +7,11 @@ if (Meteor.isClient) {
   Template.body.helpers({
     links: function () {
       return Links.find({}, {sort: {createdAt: -1}});
+    },
+    myFavorites: function() {
+      return Links.find(
+        {favoritedBy: { $elemMatch: {owner: Meteor.userId()} }}
+      );
     }
   });
 
@@ -26,12 +31,19 @@ if (Meteor.isClient) {
     },
     "click .like": function() {
       Meteor.call("like",this._id)
+      return false;
     },
     "click .unlike": function() {
       Meteor.call("unlike",this._id)
+      return false;
     },
     "click .favorite": function() {
       Meteor.call('markAsFavorite', this._id)
+      return false;
+    },
+    "click .unfavorite": function() {
+      Meteor.call('unmarkAsFavorite', this._id)
+      return false;
     }
   });
 
@@ -47,6 +59,14 @@ if (Meteor.isClient) {
     var likesByUser = Links.find({
       _id: linkId,
       likes: { $elemMatch: {owner: Meteor.userId()} }
+    }).count();
+    return (likesByUser > 0);
+  });
+
+  Template.registerHelper('isFavorite', function(linkId) {
+    var likesByUser = Links.find({
+      _id: linkId,
+      favoritedBy: { $elemMatch: {owner: Meteor.userId()} }
     }).count();
     return (likesByUser > 0);
   });
@@ -84,6 +104,12 @@ Meteor.methods({
     Links.update(
       linkId,
       { $addToSet: { favoritedBy: {owner: Meteor.userId(), username: Meteor.user().username } } }
+    )
+  },
+  unmarkAsFavorite: function(linkId) {
+    Links.update(
+      linkId,
+      { $pop: { favoritedBy: {owner: Meteor.userId(), username: Meteor.user().username } } }
     )
   }
 });

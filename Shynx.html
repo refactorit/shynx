@@ -22,6 +22,12 @@
       </form>
     </div>
 
+    <h3>My favorites</h3>
+    {{#each myFavorites}}
+      <a href="{{href}}" target="_blank">{{title}}</a> 
+      (<a href="#" class="unfavorite">remove</a>),
+    {{/each}}
+
     <ul class="list-group">
     {{#each links}}
       {{> link}}
