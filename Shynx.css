@@ -1,1 +1,8 @@
 /* CSS declarations go here */
+.new-link {
+  margin-bottom: 30px;
+}
+
+#link-title {
+  width: 900px;
+}

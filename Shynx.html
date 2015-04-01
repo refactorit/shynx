@@ -8,20 +8,6 @@
   <h1>Welcome to Shynx!</h1>
 
   {{#if currentUser}}
-    <div class="jumbotron">
-      <form class="new-link">
-        <div class="form-group">
-          <label for="link-title">Title</label>
-          <input type="text" name="title" class="form-control" id="link-title">
-        </div>
-        <div class="form-group">
-          <label for="link-title">Href</label>
-          <input type="text" name="href" class="form-control" id="link-title">
-        </div>
-        <input type="submit" class="btn btn-default" value="Add new link">
-      </form>
-    </div>
-
     <ul class="nav nav-pills">
       <li role="presentation" class="{{#if currentTab "feed"}}active{{/if}}">
         <a href="feed" class="tab-select">Feed</a>
@@ -36,6 +22,14 @@
 
     {{#if currentTab "feed"}}
       <h3>Feed</h3>
+
+      <form class="new-link form-inline">
+        <div class="form-group">
+          <input type="text" name="href" class="form-control" placeholder="http://mycoollink.com/pirate-cat" id="link-title">
+        </div>
+        <input type="submit" class="btn btn-success" value="Add new link">
+      </form>
+
       <ul class="list-group">
         {{#each links}}
           {{> link}}
