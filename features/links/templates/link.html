@@ -17,6 +17,10 @@
         <a href="#" class="not-interesting btn btn-default btn-sm"><i class="glyphicon glyphicon-trash"></i> Not interesting</a>
       {{/unless}}
     </div>
-    <a href="/comments/{{_id}}" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-list-alt"></i> Comment</a>
+    <a href="/comments/{{_id}}" class="btn btn-default btn-sm">
+      <i class="glyphicon glyphicon-list-alt"></i>&nbsp;
+      Comment
+      <span class="badge">{{commentsCount}}</span>
+    </a> 
   </li>
 </template>

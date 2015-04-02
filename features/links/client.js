@@ -71,6 +71,10 @@ if (Meteor.isClient) {
       ).count() > 0;
   });
 
+  Template.registerHelper('commentsCount', function() {
+    return this.comments.length;
+  });
+
   Template.registerHelper('currentTab', function(name) {
     var activeTab = Session.get("activeTab");
     if(!activeTab) {
