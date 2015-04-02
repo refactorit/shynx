@@ -22,6 +22,18 @@ if (Meteor.isClient) {
     },
     savedCount: function() {
       return Links.find({statuses: { $elemMatch: {owner: Meteor.userId(), status: "saved"} }}).count();
+    },
+    readLinks: function() {
+      return Links.find(
+        {statuses: { $elemMatch: {owner: Meteor.userId(), status: "read"} }},
+        {sort: {createdAt: -1}}
+      );
+    },
+    trashedLinks: function() {
+      return Links.find(
+        {statuses: { $elemMatch: {owner: Meteor.userId(), status: "not-interesting"} }},
+        {sort: {createdAt: -1}}
+      );
     }
   });
 

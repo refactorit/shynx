@@ -18,6 +18,14 @@
           Saved <span class="badge">{{ savedCount }}</span>
         </a>
       </li>
+
+      <li role="presentation" class="{{#if currentTab "read"}}active{{/if}}">
+        <a href="read" class="tab-select">Read</a>
+      </li>
+
+      <li role="presentation" class="{{#if currentTab "trash"}}active{{/if}}">
+        <a href="trash" class="tab-select">Trash</a>
+      </li>
     </ul>
 
     {{#if currentTab "feed"}}
@@ -41,15 +49,29 @@
       <h3>Saved for later</h3>
       <ul class="list-group">
         {{#each savedLinks}}
-          <li class="list-group-item">
-            <a href="#" class="unfavorite"><i class="glyphicon glyphicon-remove"></i></a>
-            <a href="{{href}}" target="_blank">{{title}}</a> - {{ href }}
-          </li>
+          {{> link}}
         {{/each}}
       </ul>
     {{/if}}
 
-    
+    {{#if currentTab "read"}}
+      <h3>Read</h3>
+      <ul class="list-group">
+        {{#each readLinks}}
+          {{> link}}
+        {{/each}}
+      </ul>
+    {{/if}}
+
+    {{#if currentTab "trash"}}
+      <h3>Trash</h3>
+      <ul class="list-group">
+        {{#each trashedLinks}}
+          {{> link}}
+        {{/each}}
+      </ul>
+    {{/if}} 
+
   {{else}}
     <div class="jumbotron">
       <h1>Share your links!</h1>
