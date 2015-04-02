@@ -7,7 +7,9 @@
       Added by {{username}} on {{formatDate createdAt}}. <br/>
     </p>
     <p>
-      <a href="#" class="mark-as-read btn btn-default btn-sm"><i class="glyphicon glyphicon-book"></i> Mark as read</a>
+      {{#unless isSaved _id}}
+        <a href="#" class="mark-as-read btn btn-default btn-sm"><i class="glyphicon glyphicon-book"></i> Mark as read</a>
+      {{/unless}}
       <a href="#" class="save btn btn-default btn-sm"><i class="glyphicon glyphicon-star"></i> Save for later</a>
       <a href="#" class="not-interesting btn btn-default btn-sm"><i class="glyphicon glyphicon-trash"></i> Not interesting</a>
     </p>

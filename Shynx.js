@@ -70,6 +70,13 @@ if (Meteor.isClient) {
     return moment(date).format('HH:mm DD/MM/YYYY');
   });
 
+  Template.registerHelper('isSaved', function(linkId) {
+    console.log();
+    return Links.find(
+        {_id: linkId, statuses: { $elemMatch: {owner: Meteor.userId(), status: "read"} }}
+      ).count() > 0;
+  });
+
   Template.registerHelper('currentTab', function(name) {
     var activeTab = Session.get("activeTab");
     if(!activeTab) {
