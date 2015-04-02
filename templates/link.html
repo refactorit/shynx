@@ -7,11 +7,15 @@
       Added by {{username}} on {{formatDate createdAt}}. <br/>
     </p>
     <p>
-      {{#unless isSaved _id}}
+      {{#unless hasStatus "read"}}
         <a href="#" class="mark-as-read btn btn-default btn-sm"><i class="glyphicon glyphicon-book"></i> Mark as read</a>
       {{/unless}}
-      <a href="#" class="save btn btn-default btn-sm"><i class="glyphicon glyphicon-star"></i> Save for later</a>
-      <a href="#" class="not-interesting btn btn-default btn-sm"><i class="glyphicon glyphicon-trash"></i> Not interesting</a>
+      {{#unless hasStatus "saved"}}
+        <a href="#" class="save btn btn-default btn-sm"><i class="glyphicon glyphicon-star"></i> Save for later</a>
+      {{/unless}}
+      {{#unless hasStatus "not-interesting"}}
+        <a href="#" class="not-interesting btn btn-default btn-sm"><i class="glyphicon glyphicon-trash"></i> Not interesting</a>
+      {{/unless}}
     </p>
   </li>
 </template>

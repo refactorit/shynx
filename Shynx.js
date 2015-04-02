@@ -70,10 +70,10 @@ if (Meteor.isClient) {
     return moment(date).format('HH:mm DD/MM/YYYY');
   });
 
-  Template.registerHelper('isSaved', function(linkId) {
-    console.log();
+  Template.registerHelper('hasStatus', function(status) {
+    console.log(status);
     return Links.find(
-        {_id: linkId, statuses: { $elemMatch: {owner: Meteor.userId(), status: "read"} }}
+        {_id: this._id, statuses: { $elemMatch: {owner: Meteor.userId(), status: status} }}
       ).count() > 0;
   });
 
