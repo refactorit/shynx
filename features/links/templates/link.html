@@ -6,7 +6,7 @@
     <p>
       Added by {{username}} on {{formatDate createdAt}}. <br/>
     </p>
-    <p>
+    <div class="btn-group">
       {{#unless hasStatus "read"}}
         <a href="#" class="mark-as-read btn btn-default btn-sm"><i class="glyphicon glyphicon-book"></i> Mark as read</a>
       {{/unless}}
@@ -16,6 +16,6 @@
       {{#unless hasStatus "not-interesting"}}
         <a href="#" class="not-interesting btn btn-default btn-sm"><i class="glyphicon glyphicon-trash"></i> Not interesting</a>
       {{/unless}}
-    </p>
+    </div>
   </li>
 </template>
