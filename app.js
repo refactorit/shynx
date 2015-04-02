@@ -12,6 +12,9 @@ Router.map( function () {
     path: '/'
   });
   this.route('comments/:id',
-    {data: function() { return Links.findOne({_id: this.params.id}) }}
+    {
+      name:'comments',
+      data: function() { return Links.findOne({_id: this.params.id}) }
+    }
   );
 });

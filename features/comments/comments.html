@@ -1,4 +1,4 @@
-<template name="comments:id">
+<template name="comments">
   <div class="container">
     {{> loginButtons}}
     <h1>Welcome to Shynx!</h1>
@@ -7,5 +7,20 @@
       <i class="glyphicon glyphicon-arrow-left"></i> All links</a>
     </h4>
     {{> link}}
+
+<ul class="list-group">
+{{#each comments}}
+  <li class="list-group-item"><strong>{{username}}:</strong> {{content}} </li>
+{{/each}}
+
+</ul>
+
+    
+    <form class="form new-comment">
+      <div class="form-group">
+        <textarea name="content" class="form-control"></textarea>
+      </div>
+      <input type="submit" value="Post comment" class="btn btn-primary">
+    </form>
   </div>
 </template>
