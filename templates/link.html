@@ -1,27 +1,19 @@
 <template name="link">
   <li class="list-group-item">
-    <a href="{{href}}" target="_blank">{{title}}</a> - {{href}} <br/>
+    <h4><a href="{{href}}" target="_blank">{{title}}</a></h4>
+    <h5>{{href}}</h5>
+
     <p>
       Added by {{username}} on {{formatDate createdAt}}. <br/>
-      
-      {{#if likes.length}}
-        <p>
-          Liked by:
-          {{#each likes}}{{username}},{{/each}}
-        </p>
-      {{/if}}
-
-      {{#if didLike _id }}
-        <a href="#" class="unlike btn btn-default btn-sm">Unlike</a>
-      {{else}}
-        <a href="#" class="like btn btn-default btn-sm"><i class="glyphicon glyphicon-thumbs-up"></i>&nbsp;Like</a>
-      {{/if}}
-
-      {{#if isFavorite _id }}
-        <a href="#" class="unfavorite btn btn-default btn-sm"><i class="glyphicon glyphicon-star"></i></a>
-      {{else}}
-        <a href="#" class="favorite btn btn-default btn-sm"><i class="glyphicon glyphicon-star-empty"></i></a>
-      {{/if}}
     </p>
+    <p>
+      <a href="#" class="mark-as-read btn btn-default btn-sm"><i class="glyphicon glyphicon-book"></i> Mark as read</a>
+      <a href="#" class="save btn btn-default btn-sm"><i class="glyphicon glyphicon-star"></i> Save for later</a>
+      <a href="#" class="not-interesting btn btn-default btn-sm"><i class="glyphicon glyphicon-trash"></i> Not interesting</a>
+    </p>
+
+    {{#each statuses}}
+      -- {{status}}
+    {{/each}}
   </li>
 </template>

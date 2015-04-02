@@ -45,6 +45,15 @@ if (Meteor.isClient) {
     "click .tab-select": function(event) {
       Session.set("activeTab", $(event.target).attr('href'));
       return false;
+    },
+    "click .mark-as-read": function(event) {
+      Meteor.call('setStatus', this._id, "read")
+    },
+    "click .save": function(event) {
+      Meteor.call('setStatus', this._id, "saved")
+    },
+    "click .not-interesting": function(event) {
+      Meteor.call('setStatus', this._id, "not-interesting")
     }
   });
 
@@ -106,6 +115,16 @@ if (Meteor.isServer) {
 }
 
 Meteor.methods({
+  setStatus: function(linkId, status) {
+    Links.update(
+      linkId,
+      { $pull: { statuses: {owner: Meteor.userId() } } }
+    )
+    Links.update(
+      linkId,
+      { $addToSet: { statuses: {owner: Meteor.userId(), status: status } } }
+    )
+  },
   like: function(linkId) {
     Links.update(
       linkId,
