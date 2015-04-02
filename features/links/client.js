@@ -1,10 +1,8 @@
-Links = new Mongo.Collection("links");
-
 if (Meteor.isClient) {
   // counter starts at 0
   Session.setDefault('counter', 0);
 
-  Template.body.helpers({
+  Template.home.helpers({
     newLinks: function() {
       return Links.find({
           statuses: {
@@ -37,7 +35,7 @@ if (Meteor.isClient) {
     }
   });
 
-  Template.body.events({
+  Template.home.events({
     "submit .new-link": function (event) {
       var href = event.target.href.value;
       Meteor.call("addLink", href);
@@ -62,10 +60,6 @@ if (Meteor.isClient) {
     }
   });
 
-  Accounts.ui.config({
-    passwordSignupFields: "USERNAME_ONLY"
-  });
-
   Template.registerHelper('formatDate', function(date) {
     return moment(date).format('HH:mm DD/MM/YYYY');
   });
@@ -85,40 +79,3 @@ if (Meteor.isClient) {
     return (name ==  activeTab);
   });
 }
-
-if (Meteor.isServer) {
-  Meteor.startup(function () {
-    Meteor.methods({
-      addLink: function(href) {
-        Meteor.http.get(href, function(error, data) {
-          var titleMatch = data.content.match(/<title>(.+)<\/title>/i);
-          var title = href;
-          if( titleMatch ) {
-            title = titleMatch[1]
-          }
-          console.log(title);
-          Links.insert({
-            title: title,
-            href: href,
-            createdAt: new Date(),
-            owner: Meteor.userId(),
-            username: Meteor.user().username
-          });
-        });
-      }
-    });
-  });
-}
-
-Meteor.methods({
-  setStatus: function(linkId, status) {
-    Links.update(
-      linkId,
-      { $pull: { statuses: {owner: Meteor.userId() } } }
-    )
-    Links.update(
-      linkId,
-      { $addToSet: { statuses: {owner: Meteor.userId(), status: status } } }
-    )
-  }
-});

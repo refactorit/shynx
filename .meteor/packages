@@ -11,3 +11,4 @@ accounts-password
 mrt:moment
 mizzao:bootstrap-3
 http
+iron:router
