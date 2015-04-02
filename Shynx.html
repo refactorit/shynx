@@ -13,9 +13,9 @@
         <a href="feed" class="tab-select">Feed</a>
       </li>
 
-      <li role="presentation" class="{{#if currentTab "favorites"}}active{{/if}}">
-        <a href="favorites" class="tab-select">
-          Favorites <span class="badge">{{ myFavoritesCount }}</span>
+      <li role="presentation" class="{{#if currentTab "saved"}}active{{/if}}">
+        <a href="saved" class="tab-select">
+          Saved <span class="badge">{{ savedCount }}</span>
         </a>
       </li>
     </ul>
@@ -31,16 +31,16 @@
       </form>
 
       <ul class="list-group">
-        {{#each links}}
+        {{#each newLinks}}
           {{> link}}
         {{/each}}
       </ul>
     {{/if}}
 
-    {{#if currentTab "favorites"}}
-      <h3>Favorites</h3>
+    {{#if currentTab "saved"}}
+      <h3>Saved for later</h3>
       <ul class="list-group">
-        {{#each myFavorites}}
+        {{#each savedLinks}}
           <li class="list-group-item">
             <a href="#" class="unfavorite"><i class="glyphicon glyphicon-remove"></i></a>
             <a href="{{href}}" target="_blank">{{title}}</a> - {{ href }}

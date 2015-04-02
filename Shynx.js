@@ -5,17 +5,23 @@ if (Meteor.isClient) {
   Session.setDefault('counter', 0);
 
   Template.body.helpers({
-    links: function () {
-      return Links.find({}, {sort: {createdAt: -1}});
-    },
-    myFavorites: function() {
-      return Links.find(
-        {favoritedBy: { $elemMatch: {owner: Meteor.userId()} }},
+    newLinks: function() {
+      return Links.find({
+          statuses: {
+            $not: { $elemMatch: {owner: Meteor.userId()} }
+          }
+        },
         {sort: {createdAt: -1}}
       );
     },
-    myFavoritesCount: function() {
-      return Links.find({favoritedBy: { $elemMatch: {owner: Meteor.userId()} }}).count();
+    savedLinks: function() {
+      return Links.find(
+        {statuses: { $elemMatch: {owner: Meteor.userId(), status: "saved"} }},
+        {sort: {createdAt: -1}}
+      );
+    },
+    savedCount: function() {
+      return Links.find({statuses: { $elemMatch: {owner: Meteor.userId(), status: "saved"} }}).count();
     }
   });
 
@@ -26,34 +32,21 @@ if (Meteor.isClient) {
       event.target.href.value = "";
       return false;
     },
-    "click .like": function() {
-      Meteor.call("like",this._id)
-      return false;
-    },
-    "click .unlike": function() {
-      Meteor.call("unlike",this._id)
-      return false;
-    },
-    "click .favorite": function() {
-      Meteor.call('markAsFavorite', this._id)
-      return false;
-    },
-    "click .unfavorite": function() {
-      Meteor.call('unmarkAsFavorite', this._id)
-      return false;
-    },
     "click .tab-select": function(event) {
       Session.set("activeTab", $(event.target).attr('href'));
       return false;
     },
     "click .mark-as-read": function(event) {
-      Meteor.call('setStatus', this._id, "read")
+      Meteor.call('setStatus', this._id, "read");
+      return false;
     },
     "click .save": function(event) {
-      Meteor.call('setStatus', this._id, "saved")
+      Meteor.call('setStatus', this._id, "saved");
+      return false;
     },
     "click .not-interesting": function(event) {
-      Meteor.call('setStatus', this._id, "not-interesting")
+      Meteor.call('setStatus', this._id, "not-interesting");
+      return false;
     }
   });
 
@@ -71,22 +64,6 @@ if (Meteor.isClient) {
       activeTab = "feed"
     }
     return (name ==  activeTab);
-  });
-
-  Template.registerHelper('didLike', function(linkId) {
-    var likesByUser = Links.find({
-      _id: linkId,
-      likes: { $elemMatch: {owner: Meteor.userId()} }
-    }).count();
-    return (likesByUser > 0);
-  });
-
-  Template.registerHelper('isFavorite', function(linkId) {
-    var likesByUser = Links.find({
-      _id: linkId,
-      favoritedBy: { $elemMatch: {owner: Meteor.userId()} }
-    }).count();
-    return (likesByUser > 0);
   });
 }
 
@@ -123,30 +100,6 @@ Meteor.methods({
     Links.update(
       linkId,
       { $addToSet: { statuses: {owner: Meteor.userId(), status: status } } }
-    )
-  },
-  like: function(linkId) {
-    Links.update(
-      linkId,
-      { $addToSet: { likes: {owner: Meteor.userId(), username: Meteor.user().username } } }
-    )
-  },
-  unlike: function(linkId) {
-    Links.update(
-      linkId,
-      { $pop: { likes: {owner: Meteor.userId()} } }
-    )
-  },
-  markAsFavorite: function(linkId) {
-    Links.update(
-      linkId,
-      { $addToSet: { favoritedBy: {owner: Meteor.userId(), username: Meteor.user().username } } }
-    )
-  },
-  unmarkAsFavorite: function(linkId) {
-    Links.update(
-      linkId,
-      { $pop: { favoritedBy: {owner: Meteor.userId(), username: Meteor.user().username } } }
     )
   }
 });
