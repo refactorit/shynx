@@ -82,4 +82,11 @@ if (Meteor.isClient) {
     }
     return (name ==  activeTab);
   });
+
+  Template.link.rendered = function() {
+    var instance = this;
+    Meteor.defer(function(){
+      SimpleAnimate(instance.firstNode, 'slideInDown');
+    });
+  }
 }
