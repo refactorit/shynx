@@ -3,15 +3,6 @@ if (Meteor.isClient) {
   Session.setDefault('counter', 0);
 
   Template.home.helpers({
-    newLinks: function() {
-      return Links.find({
-          statuses: {
-            $not: { $elemMatch: {owner: Meteor.userId()} }
-          }
-        },
-        {sort: {createdAt: -1}}
-      );
-    },
     savedLinks: function() {
       return Links.find(
         {statuses: { $elemMatch: {owner: Meteor.userId(), status: "saved"} }},
@@ -30,6 +21,18 @@ if (Meteor.isClient) {
     trashedLinks: function() {
       return Links.find(
         {statuses: { $elemMatch: {owner: Meteor.userId(), status: "not-interesting"} }},
+        {sort: {createdAt: -1}}
+      );
+    }
+  });
+
+  Template.feed.helpers({
+    newLinks: function() {
+      return Links.find({
+          statuses: {
+            $not: { $elemMatch: {owner: Meteor.userId()} }
+          }
+        },
         {sort: {createdAt: -1}}
       );
     }
@@ -65,14 +68,13 @@ if (Meteor.isClient) {
   });
 
   Template.registerHelper('hasStatus', function(status) {
-    console.log(status);
     return Links.find(
         {_id: this._id, statuses: { $elemMatch: {owner: Meteor.userId(), status: status} }}
       ).count() > 0;
   });
 
   Template.registerHelper('commentsCount', function() {
-    return this.comments.length;
+    return this.comments ? this.comments.length : null;
   });
 
   Template.registerHelper('currentTab', function(name) {
@@ -83,10 +85,15 @@ if (Meteor.isClient) {
     return (name ==  activeTab);
   });
 
-  Template.link.rendered = function() {
-    var instance = this;
+  Template.feed.rendered = function() {
+    var $this = this;
     Meteor.defer(function(){
-      SimpleAnimate(instance.firstNode, 'slideInDown');
+      $this.firstNode.parentNode._uihooks = {
+        insertElement: function(node, next) {
+          console.log("Inserting element uihook");
+          $(node).addClass('animated zoomInUp').insertBefore(next);
+        }
+      }
     });
   }
 }

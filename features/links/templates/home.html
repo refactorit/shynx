@@ -35,9 +35,7 @@
       </form>
 
       <ul class="list-group">
-        {{#each newLinks}}
-          {{> link}}
-        {{/each}}
+        {{> feed}}
       </ul>
     {{/if}}
 
@@ -75,4 +73,10 @@
     </div>
   {{/if}}
   </div>
+</template>
+
+<template name="feed">
+  {{#each newLinks}}
+    {{> link}}
+  {{/each}}
 </template>

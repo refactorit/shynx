@@ -8,7 +8,6 @@ if (Meteor.isServer) {
           if( titleMatch ) {
             title = titleMatch[1]
           }
-          console.log(title);
           Links.insert({
             title: title,
             href: href,
