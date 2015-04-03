@@ -21,6 +21,7 @@ if (Meteor.isClient) {
           $(node).addClass('animated fadeInUp').insertBefore(next);
         },
         removeElement: function(node) {
+          console.log("REmoving comment uihook");
           $(node).addClass('animated fadeOutRight')
             .on('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
               $(node).remove()
