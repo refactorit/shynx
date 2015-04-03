@@ -7,9 +7,7 @@ if (Meteor.isClient) {
     },
     "click .delete-comment": function(event) {
       var $this = this;
-      SimpleAnimate(event.target.parentElement, 'bounceOutRight', function(event) {
-        Meteor.call('deleteComment', $this._id);
-      });
+      Meteor.call('deleteComment', $this._id);
       return false;
     }
   });
@@ -21,6 +19,12 @@ if (Meteor.isClient) {
         insertElement: function(node, next) {
           console.log("Inserting comment uihook");
           $(node).addClass('animated fadeInUp').insertBefore(next);
+        },
+        removeElement: function(node) {
+          $(node).addClass('animated fadeOutRight')
+            .on('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+              $(node).remove()
+            });
         }
       }
     });
