@@ -89,6 +89,7 @@ if (Meteor.isClient) {
       console.log("Rendering comments");
       $(instance.firstNode).addClass('animated bounceInLeft');
       $(instance.firstNode).removeClass('hide');
+      $(instance.firstNode).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(event) { console.log("animation finished"); });
     });
   }
 }
