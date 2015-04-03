@@ -13,4 +13,11 @@ if (Meteor.isClient) {
       return false;
     }
   });
+
+  Template.comment.rendered = function() {
+    var instance = this;
+    Meteor.defer(function(){
+      SimpleAnimate(instance.firstNode, 'flipInX');
+    });
+  }
 }
