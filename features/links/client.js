@@ -88,6 +88,7 @@ if (Meteor.isClient) {
     Meteor.defer(function(){
       console.log("Rendering comments");
       $(instance.firstNode).addClass('animated bounceInLeft');
+      $(instance.firstNode).removeClass('hide');
     });
   }
 }

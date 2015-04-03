@@ -1,3 +1,6 @@
 <template name="comment">
-  <li class="list-group-item"><strong>{{username}}:</strong> {{content}} </li>
+  <li class="list-group-item hide">
+    {{_id}}<strong>{{username}}:</strong> {{content}}
+    <a href="#" class="delete-comment">X</a>
+  </li>
 </template>

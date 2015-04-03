@@ -8,6 +8,11 @@ if (Meteor.isClient) {
       var content = event.target.content.value;
       Meteor.call('addComment', this._id, content);
       return false;
+    },
+    "click .delete-comment": function() {
+      console.log("DELETEEE!");
+      Meteor.call('deleteComment', this._id);
+      return false;
     }
   });
 
