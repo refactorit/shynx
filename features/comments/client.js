@@ -14,10 +14,15 @@ if (Meteor.isClient) {
     }
   });
 
-  Template.comment.rendered = function() {
+  Template.comments.rendered = function() {
     var instance = this;
     Meteor.defer(function(){
-      SimpleAnimate(instance.firstNode, 'flipInX');
+      $("#comments").get(0)._uihooks = {
+        insertElement: function(node, next) {
+          console.log("Inserting comment uihook");
+          $(node).addClass('animated fadeInUp').insertBefore(next);
+        }
+      }
     });
   }
 }
