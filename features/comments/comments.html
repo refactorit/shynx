@@ -19,7 +19,7 @@
     <h2>Comments</h2>
     <ul class="list-group">
       {{#each comments}}
-        <li class="list-group-item"><strong>{{username}}:</strong> {{content}} </li>
+        {{> comment}}
       {{/each}}
     </ul>
 
