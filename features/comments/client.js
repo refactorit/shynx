@@ -7,16 +7,10 @@ if (Meteor.isClient) {
     },
     "click .delete-comment": function(event) {
       var $this = this;
-      $(event.target.parentElement).addClass('animated bounceOutRight');
-      $(event.target.parentElement).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',
-        function(event) {
-          console.log("animation ended - start delete");
-          Meteor.call('deleteComment', $this._id);
-        }
-      );
+      SimpleAnimate(event.target.parentElement, 'bounceOutRight', function(event) {
+        Meteor.call('deleteComment', $this._id);
+      });
       return false;
     }
   });
-
-
 }
