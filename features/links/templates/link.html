@@ -17,10 +17,15 @@
         <a href="#" class="not-interesting btn btn-default btn-sm"><i class="glyphicon glyphicon-trash"></i> Not interesting</a>
       {{/unless}}
     </div>
-    <a href="/comments/{{_id}}" class="btn btn-default btn-sm">
-      <i class="glyphicon glyphicon-list-alt"></i>&nbsp;
-      Comment
-      <span class="badge">{{commentsCount}}</span>
-    </a> 
+    <a href="#" class="recommend btn btn-default btn-sm">
+      <i class="glyphicon glyphicon-thumbs-up"></i>&nbsp;
+      Recommend
+      <span class="badge">{{recommendsCount}}</span>
+    </a>
+    {{#if recommends}}
+      <div>
+        <strong>Recommended by:</strong> {{#each recommends}}{{username}}, {{/each}}
+      </div>
+    {{/if}}
   </li>
 </template>

@@ -11,10 +11,4 @@ Router.map( function () {
   this.route('home', {
     path: '/'
   });
-  this.route('comments/:id',
-    {
-      name:'comments',
-      data: function() { return Links.findOne({_id: this.params.id}) }
-    }
-  );
 });

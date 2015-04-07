@@ -60,6 +60,10 @@ if (Meteor.isClient) {
     "click .not-interesting": function(event) {
       Meteor.call('setStatus', this._id, "not-interesting");
       return false;
+    },
+    "click .recommend": function(event) {
+      Meteor.call('recommend', this._id);
+      return false;
     }
   });
 
@@ -73,8 +77,8 @@ if (Meteor.isClient) {
       ).count() > 0;
   });
 
-  Template.registerHelper('commentsCount', function() {
-    return this.comments ? this.comments.length : null;
+  Template.registerHelper('recommendsCount', function() {
+    return this.recommends ? this.recommends.length : 0;
   });
 
   Template.registerHelper('currentTab', function(name) {
@@ -88,6 +92,7 @@ if (Meteor.isClient) {
   Template.feed.rendered = function() {
     var $this = this;
     Meteor.defer(function(){
+      $('[data-toggle="tooltip"]').tooltip()
       $this.firstNode.parentNode._uihooks = {
         insertElement: function(node, next) {
           console.log("Inserting element uihook");
