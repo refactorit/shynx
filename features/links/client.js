@@ -92,6 +92,13 @@ if (Meteor.isClient) {
         insertElement: function(node, next) {
           console.log("Inserting element uihook");
           $(node).addClass('animated zoomInUp').insertBefore(next);
+        },
+        removeElement: function(node) {
+          console.log("REmoving link uihook");
+          $(node).addClass('animated fadeOutRight')
+            .on('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+              $(node).remove()
+            });
         }
       }
     });

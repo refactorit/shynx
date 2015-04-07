@@ -1,28 +1,30 @@
-Meteor.methods({
-  addComment: function(linkId, content) {
-    Links.update(
-      linkId,
-      { 
-        $addToSet: { 
-          comments: {
-            _id: new Meteor.Collection.ObjectID(),
-            owner: Meteor.userId(),
-            content: content,
-            username: Meteor.user().username
+if (Meteor.isServer) {
+  Meteor.methods({
+    addComment: function(linkId, content) {
+      Links.update(
+        linkId,
+        { 
+          $push: { 
+            comments: {
+              _id: new Meteor.Collection.ObjectID(),
+              owner: Meteor.userId(),
+              content: content,
+              username: Meteor.user().username
+            } 
           } 
-        } 
-      }
-    )
-  },
-  deleteComment: function(commentId) {
-    Links.update(
-      {},
-      { 
-        $pull: { 
-          comments: { _id: commentId } 
-        } 
-      },
-      { multi: true }
-    )
-  }
-});
+        }
+      )
+    },
+    deleteComment: function(commentId) {
+      Links.update(
+        {},
+        { 
+          $pull: { 
+            comments: { _id: commentId } 
+          } 
+        },
+        { multi: true }
+      )
+    }
+  });
+};
