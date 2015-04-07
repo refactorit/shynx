@@ -41,7 +41,10 @@ if (Meteor.isClient) {
   Template.home.events({
     "submit .new-link": function (event) {
       var href = event.target.href.value;
-      Meteor.call("addLink", href);
+      $("#new-link-loader").removeClass("hide");
+      Meteor.call("addLink", href, function() {
+        $("#new-link-loader").addClass("hide");
+      });
       event.target.href.value = "";
       return false;
     },
