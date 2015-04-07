@@ -63,6 +63,7 @@ if (Meteor.isClient) {
     },
     "click .recommend": function(event) {
       Meteor.call('recommend', this._id);
+      $(event.target).find(".badge").addClass("animated bounce");
       return false;
     }
   });
