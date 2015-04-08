@@ -1,7 +1,4 @@
 if (Meteor.isClient) {
-  // counter starts at 0
-  Session.setDefault('counter', 0);
-
   Template.home.helpers({
     savedLinks: function() {
       return Links.find(
@@ -69,10 +66,6 @@ if (Meteor.isClient) {
       $(event.target).find(".badge").addClass("animated bounce");
       return false;
     }
-  });
-
-  Template.registerHelper('formatDate', function(date) {
-    return moment(date).format('HH:mm DD/MM/YYYY');
   });
 
   Template.registerHelper('hasStatus', function(status) {
