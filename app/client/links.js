@@ -1,5 +1,5 @@
 if (Meteor.isClient) {
-  Template.home.helpers({
+  Template.channel.helpers({
     savedLinks: function() {
       return Links.find(
         {statuses: { $elemMatch: {owner: Meteor.userId(), status: "saved"} }},
@@ -25,7 +25,8 @@ if (Meteor.isClient) {
 
   Template.feed.helpers({
     newLinks: function() {
-      return Links.find({
+      console.log(this._id);
+      return Links.find({channel: this._id},{
           statuses: {
             $not: { $elemMatch: {owner: Meteor.userId()} }
           }
@@ -35,11 +36,12 @@ if (Meteor.isClient) {
     }
   });
 
-  Template.home.events({
+  Template.channel.events({
     "submit .new-link": function (event) {
       var href = event.target.href.value;
       $("#new-link-loader").removeClass("hide");
-      Meteor.call("addLink", href, function() {
+      console.log(">>>" + this._id);
+      Meteor.call("addLink", href, this._id, function() {
         $("#new-link-loader").addClass("hide");
       });
       event.target.href.value = "";
@@ -86,23 +88,22 @@ if (Meteor.isClient) {
     return (name ==  activeTab);
   });
 
-  Template.feed.rendered = function() {
-    var $this = this;
-    Meteor.defer(function(){
-      $('[data-toggle="tooltip"]').tooltip()
-      $this.firstNode.parentNode._uihooks = {
-        insertElement: function(node, next) {
-          console.log("Inserting element uihook");
-          $(node).addClass('animated zoomInUp').insertBefore(next);
-        },
-        removeElement: function(node) {
-          console.log("REmoving link uihook");
-          $(node).addClass('animated fadeOutRight')
-            .on('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
-              $(node).remove()
-            });
-        }
-      }
-    });
-  }
+  // Template.feed.rendered = function() {
+  //   var $this = this;
+  //   Meteor.defer(function(){
+  //     $this.firstNode.parentNode._uihooks = {
+  //       insertElement: function(node, next) {
+  //         console.log("Inserting element uihook");
+  //         $(node).addClass('animated zoomInUp').insertBefore(next);
+  //       },
+  //       removeElement: function(node) {
+  //         console.log("REmoving link uihook");
+  //         $(node).addClass('animated fadeOutRight')
+  //           .on('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+  //             $(node).remove()
+  //           });
+  //       }
+  //     }
+  //   });
+  // }
 }

@@ -6,5 +6,5 @@
     <input type="submit" class="btn btn-primary"/>
   </form>
 
-  {{#each channels}}{{name}},{{/each}}
+  {{#each channels}}<a href="/channel/{{_id}}">{{name}}</a>,{{/each}}
 </template>
