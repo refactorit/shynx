@@ -14,3 +14,5 @@ http
 iron:router
 insecure
 email
+aldeed:autoform
+aldeed:collection2

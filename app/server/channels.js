@@ -5,6 +5,10 @@ Meteor.startup(function () {
         name: name,
         users: [{_id: Meteor.userId()}]
       });
+    },
+    addCurrentUserToChannel: function(channel) {
+      channel.users = [ Meteor.userId() ];
+      Channels.insert(channel)  
     }
   });
 });
