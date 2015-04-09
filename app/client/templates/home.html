@@ -2,13 +2,12 @@
   <div class="container">
   {{> loginButtons}}
 
-  {{> newChannel }}
   {{> channelToolbar}}
 
   <h1>Welcome to Shynx!</h1>
 
   {{#if currentUser}}
-    
+    {{> newChannel }}
   {{else}}
     <div class="jumbotron">
       <h1>Share your links!</h1>
