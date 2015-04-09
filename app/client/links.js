@@ -67,7 +67,6 @@ if (Meteor.isClient) {
     },
     "click .recommend": function(event) {
       Meteor.call('recommend', this._id);
-      $(event.target).find(".badge").addClass("animated bounce");
       return false;
     }
   });
@@ -90,22 +89,5 @@ if (Meteor.isClient) {
     return (name ==  activeTab);
   });
 
-  // Template.feed.rendered = function() {
-  //   var $this = this;
-  //   Meteor.defer(function(){
-  //     $this.firstNode.parentNode._uihooks = {
-  //       insertElement: function(node, next) {
-  //         console.log("Inserting element uihook");
-  //         $(node).addClass('animated zoomInUp').insertBefore(next);
-  //       },
-  //       removeElement: function(node) {
-  //         console.log("REmoving link uihook");
-  //         $(node).addClass('animated fadeOutRight')
-  //           .on('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
-  //             $(node).remove()
-  //           });
-  //       }
-  //     }
-  //   });
-  // }
+
 }

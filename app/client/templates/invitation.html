@@ -1,0 +1,11 @@
+<template name="invitation">
+  <div class="container">
+    {{> loginButtons}}
+    {{#if currentUser}}
+      Click here to accept invitation.
+      <button class="btn btn-primary" id="join-channel">Join channel</button>
+    {{else}}
+      Please sign in or register to accept your invitation.
+    {{/if}}
+  </div>
+</template>
