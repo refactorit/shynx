@@ -1,4 +1,9 @@
 <template name="newChannel">
   <h2>Create a new channel</h2>
-  {{> quickForm collection="Channels" id="insertChannelForm" type="method" meteormethod="addCurrentUserToChannel"}}
+  {{#autoForm collection="Channels" id="insertChannelForm" type="method" meteormethod="addCurrentUserToChannel"}}
+    <fieldset>
+      {{> afQuickField name='name'}}
+    </fieldset>
+    <button type="submit" class="btn btn-primary">Insert</button>
+  {{/autoForm}}
 </template>
