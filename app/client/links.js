@@ -26,10 +26,12 @@ if (Meteor.isClient) {
   Template.feed.helpers({
     newLinks: function() {
       console.log(this._id);
-      return Links.find({channel: this._id},{
-          statuses: {
-            $not: { $elemMatch: {owner: Meteor.userId()} }
-          }
+      return Links.find(
+          {
+            channel: this._id,
+            statuses: {
+              $not: { $elemMatch: {owner: Meteor.userId()} }
+            }
         },
         {sort: {createdAt: -1}}
       );
