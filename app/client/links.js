@@ -2,22 +2,22 @@ if (Meteor.isClient) {
   Template.channel.helpers({
     savedLinks: function() {
       return Links.find(
-        {statuses: { $elemMatch: {owner: Meteor.userId(), status: "saved"} }},
+        {channel: this._id, statuses: { $elemMatch: {owner: Meteor.userId(), status: "saved"} }},
         {sort: {createdAt: -1}}
       );
     },
     savedCount: function() {
-      return Links.find({statuses: { $elemMatch: {owner: Meteor.userId(), status: "saved"} }}).count();
+      return Links.find({channel: this._id, statuses: { $elemMatch: {owner: Meteor.userId(), status: "saved"} }}).count();
     },
     readLinks: function() {
       return Links.find(
-        {statuses: { $elemMatch: {owner: Meteor.userId(), status: "read"} }},
+        {channel: this._id, statuses: { $elemMatch: {owner: Meteor.userId(), status: "read"} }},
         {sort: {createdAt: -1}}
       );
     },
     trashedLinks: function() {
       return Links.find(
-        {statuses: { $elemMatch: {owner: Meteor.userId(), status: "not-interesting"} }},
+        {channel: this._id, statuses: { $elemMatch: {owner: Meteor.userId(), status: "not-interesting"} }},
         {sort: {createdAt: -1}}
       );
     }
