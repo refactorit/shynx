@@ -1,0 +1,12 @@
+<template name="invitations">
+  <div class="container">
+    {{> channelToolbar }}
+    {{#each users}}{{_id}}{{/each}}
+
+    <h1>Invite users to {{name}}</h1>
+    <form class="form" id="new-invitation">
+    <input name="email" placeholder="my.friend@gmail.com">
+    <input type="submit" value="Invite user" class="btn btn-primary">
+    </form>
+  </div>
+</template>
