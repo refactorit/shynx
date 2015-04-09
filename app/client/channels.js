@@ -1,4 +1,4 @@
-Template.newChannel.helpers({
+Template.channelToolbar.helpers({
   channels: function() {
     return Channels.find({});
   }
@@ -12,5 +12,11 @@ Template.newChannel.events({
     }
     event.target.name.value = "";
     return false;
+  }
+});
+
+Template.channelToolbar.events({
+  "change #channel-select": function(event) {
+    Router.go('/channel/'+event.target.value)
   }
 });
