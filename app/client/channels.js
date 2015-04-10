@@ -16,6 +16,13 @@ Template.newChannel.events({
 });
 
 Template.navbar.events({
+  "click #new-channel-link": function (event) {
+    Router.go('/channel/new');
+    return false;
+  }
+})
+
+Template.navbar.events({
   "change #channel-select": function(event) {
     Router.go('/channel/'+event.target.value)
   }
