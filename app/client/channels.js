@@ -1,6 +1,8 @@
 Template.navbar.helpers({
   channels: function() {
-    return Channels.find({});
+    console.log("User id " + Meteor.userId());
+    return Channels.find({users: {$elemMatch: {$in: [Meteor.userId()]} }});
+
   }
 });
 
