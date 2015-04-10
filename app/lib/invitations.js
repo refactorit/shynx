@@ -6,11 +6,5 @@ Meteor.methods({
     );
     Invitations.remove({_id: invitationId});
     Router.go("/channel/"+channelId);
-  },
-  kickFromChannel: function(channelId, userId) {
-    Channels.update(
-      channelId,
-      { $pull: { users: userId } }
-    );
   }
 });

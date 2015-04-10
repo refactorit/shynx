@@ -17,7 +17,7 @@ Router.map( function () {
     this.render('newChannel');
   });
   this.route('channel/:_id/invite', function(){
-    this.render('Invitations', { data: function() {
+    this.render('userManager', { data: function() {
       return Channels.findOne({ _id: this.params._id })
     }});
   });
