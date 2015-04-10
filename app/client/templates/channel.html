@@ -1,7 +1,7 @@
 <template name="channel">
+  {{> navbar}}
+
   <div class="container">
-    {{> newChannel }}
-    {{> channelToolbar }}
 
     {{#each users}}{{_id}}{{/each}}
     <h1>Channel {{name}}</h1>

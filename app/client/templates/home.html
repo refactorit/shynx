@@ -1,19 +1,16 @@
 <template name="home">
+  {{> navbar}}
+
   <div class="container">
-  {{> loginButtons}}
-
-  {{> channelToolbar}}
-
-  <h1>Welcome to Shynx!</h1>
-
-  {{#if currentUser}}
-    {{> newChannel }}
-  {{else}}
-    <div class="jumbotron">
-      <h1>Share your links!</h1>
-      <h2>Just for awesome startups!</h2>
-    </div>
-  {{/if}}
+    <h1>Welcome to Shynx!</h1>
+    {{#if currentUser}}
+      {{> newChannel }}
+    {{else}}
+      <div class="jumbotron">
+        <h1>Share your links!</h1>
+        <h2>Just for awesome startups!</h2>
+      </div>
+    {{/if}}
   </div>
 </template>
 
