@@ -5,7 +5,6 @@ Meteor.startup(function () {
         receiver: email,
         channel: channelId
       });
-      console.log(invitation);
       Email.send({
         to: email,
         subject: "You have been invited to a Shynx channel",

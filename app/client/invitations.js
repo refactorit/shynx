@@ -1,6 +1,8 @@
 Template.invitations.events({
   "submit #new-invitation": function (event) {
     Meteor.call("inviteUser", event.target.email.value, this._id);
+    event.target.email.value = "";
+    alert("Invitation has been sent.");
     return false;
   }
 });
