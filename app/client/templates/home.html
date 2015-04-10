@@ -17,5 +17,7 @@
 <template name="feed">
   {{#each newLinks}}
     {{> link}}
+  {{else}}
+    <p class="alert alert-success">Your feed is empty. That's good!</p>
   {{/each}}
 </template>

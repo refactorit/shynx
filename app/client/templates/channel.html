@@ -51,6 +51,8 @@
       <ul class="list-group">
         {{#each savedLinks}}
           {{> link}}
+        {{else}}
+          <p class="alert alert-info">You have no saved links yet.</p>
         {{/each}}
       </ul>
     {{/if}}
@@ -60,6 +62,8 @@
       <ul class="list-group">
         {{#each readLinks}}
           {{> link}}
+        {{else}}
+          <p class="alert alert-info">You have no read links yet.</p>
         {{/each}}
       </ul>
     {{/if}}
@@ -69,6 +73,8 @@
       <ul class="list-group">
         {{#each trashedLinks}}
           {{> link}}
+        {{else}}
+          <p class="alert alert-info">You have no deleted links yet.</p>
         {{/each}}
       </ul>
     {{/if}} 
