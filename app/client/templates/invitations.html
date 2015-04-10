@@ -1,12 +1,22 @@
 <template name="invitations">
+  {{> navbar}}
   <div class="container">
-    {{> channelToolbar }}
-    {{#each users}}{{_id}}{{/each}}
+    <h1>Users</h1>
+    <table class="table">
+    {{#each usersInChannel}}
+      <tr>
+        <td>{{username}}</td>
+        <td><button class="btn btn-default">Kick out</button></td>
+      </tr>
+    {{/each}}
+    </table>
 
-    <h1>Invite users to {{name}}</h1>
+    <hr/>
     <form class="form" id="new-invitation">
-    <input name="email" placeholder="my.friend@gmail.com">
-    <input type="submit" value="Invite user" class="btn btn-primary">
+      <div class="form-group">
+        <input name="email" placeholder="my.friend@gmail.com" class="form-control">
+      </div>
+      <input type="submit" value="Invite user" class="btn btn-primary">
     </form>
   </div>
 </template>

@@ -11,3 +11,9 @@ Template.invitation.events({
     return false;
   }
 });
+
+Template.invitations.helpers({
+  usersInChannel: function() {
+    return Meteor.users.find({_id: {$in: this.users }});
+  }
+});

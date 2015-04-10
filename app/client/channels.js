@@ -21,9 +21,3 @@ Template.navbar.events({
     return false;
   }
 })
-
-Template.navbar.events({
-  "change #channel-select": function(event) {
-    Router.go('/channel/'+event.target.value)
-  }
-});
