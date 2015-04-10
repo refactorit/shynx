@@ -1,8 +1,18 @@
 Router.map( function () {
-  this.route('about');
   this.route('home', {
     path: '/'
   });
+
+  Router.onBeforeAction(function() {
+    if (! Meteor.userId()) {
+      this.render('home');
+    } else {
+      this.next();
+    }},
+    {except: ['home','invitation']}
+  );
+
+
   this.route('channel/new', function(){
     this.render('newChannel');
   });
@@ -20,5 +30,5 @@ Router.map( function () {
     this.render('invitation', { data: function() {
       return Invitations.findOne({ _id: this.params._id })
     }})
-  });
+  }, {name: 'invitation'});
 });
