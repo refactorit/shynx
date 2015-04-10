@@ -4,6 +4,11 @@ Template.invitations.events({
     event.target.email.value = "";
     alert("Invitation has been sent.");
     return false;
+  },
+  "click .kick-out": function () {
+    var channelId = Template.parentData(this)._id;
+    Meteor.call("kickFromChannel", channelId, this._id);
+    return false;
   }
 });
 
