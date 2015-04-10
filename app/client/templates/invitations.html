@@ -6,6 +6,7 @@
     {{#each usersInChannel}}
       <tr>
         <td>{{username}}</td>
+        <td>{{#each emails}}{{address}}{{/each}}</td>
         <td><button class="btn btn-default kick-out">Kick out</button></td>
       </tr>
     {{/each}}
