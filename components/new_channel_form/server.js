@@ -1,11 +1,9 @@
 if( Meteor.isServer ) {
   Meteor.startup(function () {
     Meteor.methods({
-      createChannel: function(name) {
-        return Channels.insert({
-          name: name,
-          users: [{_id: Meteor.userId()}]
-        });
+      createChannel: function(doc) {
+        doc.users = [Meteor.userId()];
+        Channels.insert(doc);
       }
     });
   });

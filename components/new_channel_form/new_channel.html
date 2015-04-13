@@ -2,7 +2,7 @@
   {{> navbar}}
   <div class="container">
     <h2>Create a new channel</h2>
-    {{#autoForm collection="Channels" id="insertChannelForm" type="method" meteormethod="addCurrentUserToChannel"}}
+    {{#autoForm collection="Channels" id="insertChannelForm" type="method" meteormethod="createChannel"}}
       <fieldset>
         {{> afQuickField name='name'}}
       </fieldset>
