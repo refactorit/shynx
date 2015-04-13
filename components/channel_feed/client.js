@@ -1,15 +1,5 @@
 if (Meteor.isClient) {
   Template.channel.events({
-    "submit .new-link": function (event) {
-      var href = event.target.href.value;
-      $("#new-link-loader").removeClass("hide");
-      console.log(">>>" + this._id);
-      Meteor.call("addLink", href, this._id, function() {
-        $("#new-link-loader").addClass("hide");
-      });
-      event.target.href.value = "";
-      return false;
-    },
     "click .tab-select": function(event) {
       Session.set("activeTab", $(event.target).attr('href'));
       return false;
