@@ -9,7 +9,7 @@ if(Meteor.isServer) {
         Email.send({
           to: email,
           subject: "You have been invited to a Shynx channel",
-          text: "You have been invited to a shynx channel " + channelName + ".\n http://localhost:3000/invitation/" + invitation
+          text: "You have been invited to a shynx channel " + channelName + ".\n "+ baseUrl +"invitation/" + invitation
         });
       }
     });

@@ -1,4 +1,14 @@
 Links = new Mongo.Collection("links");
+
+var statusSchema = new SimpleSchema({
+  owner: {
+    type: String
+  },
+  status: {
+    type: String
+  }
+});
+
 Links.attachSchema(new SimpleSchema({
   title: {
     type: String,
@@ -23,6 +33,10 @@ Links.attachSchema(new SimpleSchema({
   },
   createdAt: {
     type: Date,
+    optional: true
+  },
+  statuses: {
+    type: [statusSchema],
     optional: true
   }
 }));
