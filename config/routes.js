@@ -28,6 +28,7 @@ Router.map( function () {
     }});
   });
   this.route('invitation/:_id', function(){
+    Meteor.subscribe("invitations", this.params._id);
     this.render('invitation', { data: function() {
       return Invitations.findOne({ _id: this.params._id })
     }})
