@@ -1,7 +1,9 @@
 if(Meteor.isClient) {
+  Meteor.subscribe("channels");
+
   Template.navbar.helpers({
     channels: function() {
-      return Channels.find({users: {$elemMatch: {$in: [Meteor.userId()]} }});
+      return Channels.find({});
     }
   });
 
