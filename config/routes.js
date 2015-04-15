@@ -22,6 +22,7 @@ Router.map( function () {
     }});
   });
   this.route('channel/:_id', function(){
+    Meteor.subscribe("links", this.params._id);
     this.render('Channel', { data: function() {
       return Channels.findOne({ _id: this.params._id })
     }});
